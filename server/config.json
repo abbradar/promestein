@@ -1,0 +1,13 @@
+{
+	"port": 8080,
+	"dictionary": "data/JMdict.sqlite",
+	"state": "state.sqlite",
+	"google-credentials": "data/promestein.json",
+	"plugins": "plugins",
+	"global-hotkeys": {
+		"alt S": "promestein.plugins.screenshot-vbox/post-screenshot"
+	},
+	"frontend": {
+		"port": 8082
+	}
+}

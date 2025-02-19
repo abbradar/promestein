@@ -1,0 +1,10 @@
+{:lein {}
+ :builds
+ {:app {:target :browser
+        :output-dir "resources/public/js"
+        :asset-path "/js"
+
+        :modules
+        {:main {:entries [promestein.frontend.core]}}
+
+        :devtools {:http-root "public-dev" :http-port 8082}}}}

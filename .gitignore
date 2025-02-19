@@ -1,0 +1,17 @@
+# Common build artifacts
+target/
+classes/
+*.jar
+*.class
+
+# IDE and development files
+.nrepl-port
+.lein-*
+.shadow-cljs/
+node_modules/
+
+# Project-wide ignores
+_attic
+pom.xml
+pom.xml.asc
+
