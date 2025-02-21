@@ -11,5 +11,5 @@ cleanup() {
 }
 trap cleanup EXIT
 
-gnome-screenshot -w -f "$dir/image.png"
+gamescopectl screenshot "$dir/image.png"
 curl -F "image=@$dir/image.png" "$host/pages/new/image"
