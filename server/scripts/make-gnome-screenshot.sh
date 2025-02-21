@@ -5,7 +5,7 @@ if [ -n "$1" ]; then
   host="$1"
 fi
 
-dir="$(mktemp -d promestein-screenshot.XXXXXX)"
+dir="$(mktemp --tmpdir -d promestein-screenshot.XXXXXX)"
 cleanup() {
   rm -rf "$dir"
 }
