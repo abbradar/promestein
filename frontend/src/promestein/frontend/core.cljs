@@ -18,19 +18,21 @@
   []
   [ui/not-found-component])
 
-(defn get-config
+(defn get-host-config
   "Update frontend configuration from well-known location."
   []
   (go
-    (let [new-config (-> (http/get "/config.json") <! :body)]
-      (common/set-config! new-config))))
+    (let [host-config (-> (http/get "/config.json") <! :body)
+          backend-url (:backend-url host-config)]
+      (common/update-config! (dissoc host-config :backend-url))
+      (common/set-backend-url! backend-url))))
 
 (defn top-level-component
-  [data]
-  (if-let [cfg @common/ref-config]
+  [_data]
+  (if @common/ref-backend-url
     [ui/main-component current-page-component]
     (do
-      (get-config)
+      (get-host-config)
       [ui/spinner-component])))
 
 (defn ^:dev/after-load start

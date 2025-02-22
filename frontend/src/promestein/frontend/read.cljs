@@ -9,7 +9,7 @@
     :refer-macros [defcomponent]
     :refer [tr-extend set-current-page!]]
    [promestein.frontend.ui.cache :as cache :refer [lru-cache]]
-   [promestein.frontend.common :refer [ref-config with-ajax' with-image']]
+   [promestein.frontend.common :refer [ref-config ref-backend-url with-ajax' with-image']]
    [promestein.frontend.components.text :as text]
    [promestein.frontend.components.image-map :as image-map]))
 
@@ -277,4 +277,4 @@
 (defcomponent read-watch [params]
   [ui/with-sse
    [watch-component params]
-   (str (:backend-url @ref-config) "/pages/events")])
+   (str @ref-backend-url "/pages/events")])

@@ -8,7 +8,7 @@
     :as ui
     :refer [tr tr-extend set-current-page!]]
    [promestein.frontend.ui.cache :as cache]
-   [promestein.frontend.common :refer [ref-config]]
+   [promestein.frontend.common :refer [ref-backend-url]]
    [promestein.frontend.read :as read]))
 
 (tr-extend
@@ -32,7 +32,7 @@
   (ui/redir (str "/read/" (some-> ids first :id))))
 
 (defmethod upload-component :text []
-  (when-let [backend-url (:backend-url @ref-config)]
+  (when-let [backend-url @ref-backend-url]
     [ui/form-component
      {:method :post
       :action (str backend-url "/pages/new/text")
@@ -60,7 +60,7 @@
       :type :text-long}]))
 
 (defmethod upload-component :image []
-  (when-let [backend-url (:backend-url @ref-config)]
+  (when-let [backend-url @ref-backend-url]
     [ui/form-component
      {:method :post
       :action (str backend-url "/pages/new/image")

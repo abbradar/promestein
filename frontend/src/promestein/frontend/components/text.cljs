@@ -88,7 +88,7 @@
 
                      (go
                        (reset! ref-locked? true)
-                       (let [response (<! (http/put (str (-> config :backend-url) "/tokens")
+                       (let [response (<! (http/put (str @ref-backend-url "/tokens")
                                                     {:json-params
                                                      {:ids    ids
                                                       :params params}

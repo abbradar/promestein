@@ -9,7 +9,7 @@
    ["iso-639-2"      :as iso-639-2-data]
    [promestein.frontend.ui.core :as ui]
    [promestein.frontend.ui.cache :as cache :refer [lru-cache]]
-   [promestein.frontend.common :refer [ref-config with-ajax']]
+   [promestein.frontend.common :refer [ref-config ref-backend-url with-ajax']]
    [promestein.frontend.components.token :as token]))
 
 (defonce iso-639-2
@@ -24,7 +24,7 @@
 
 (defonce entities-reload
   (r/track! (fn []
-              (when-let [backend-url (:backend-url @ref-config)]
+              (when-let [backend-url @ref-backend-url]
                 (go (let [response (<! (http/get (str backend-url "/dictionary/entities")
                                                  {:with-credentials? false}))]
                       (if-not (:success response)

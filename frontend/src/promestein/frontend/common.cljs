@@ -2,6 +2,7 @@
   (:require
    [clojure.string :as s]
    [reagent.core :as r]
+   [alandipert.storage-atom :refer [local-storage]]
    [promestein.frontend.ui.core :as ui :refer [tr-extend]]
    [promestein.frontend.ui.cache :refer [lru-cache]]))
 
@@ -15,8 +16,6 @@
  {:en
   {:footer
    {:all-rights-reserved "All rights reserved"}}})
-
-(defonce ref-config (r/atom nil))
 
 (def default-config
   {:ruby
@@ -48,12 +47,18 @@
     {:foreground "#888888"
      :background "#EEEEEE"}}})
 
-(defn set-config!
+(def ref-config (local-storage (r/atom default-config) :config))
+
+(defn update-config!
   [config]
-  (reset! ref-config (-> (merge default-config config)
-                         (update :backend-url #(s/replace % #"<hostname>" (-> js/window .-location .-hostname)))
+  (reset! ref-config (-> (merge @ref-config config)
                          (update-in [:ruby :format] #(map keyword %))
                          (update :user-languages #(->> % (map keyword) (into #{}))))))
+
+(def ref-backend-url (r/atom nil))
+
+(defn set-backend-url! [url]
+  (reset! ref-backend-url (s/replace url #"<hostname>" (-> js/window .-location .-hostname))))
 
 (defn error-component [e]
   (condp = (:status e)
@@ -68,7 +73,7 @@
      :cache             fallback-cache}))
 
 (defn with-ajax' [component props args]
-  (if-let [backend-url (:backend-url @ref-config)]
+  (if-let [backend-url @ref-backend-url]
     (ui/with-ajax
       component
       (-> default-placeholder-props
@@ -82,7 +87,7 @@
     [ui/spinner-component]))
 
 (defn with-image' [component props path]
-  (if-let [backend-url (:backend-url @ref-config)]
+  (if-let [backend-url @ref-backend-url]
     (ui/with-image
       component
       (-> default-placeholder-props
