@@ -6,6 +6,7 @@
    [cljs.core.async  :refer [<!]]
    [cljs-http.client :as http]
    [promestein.frontend.ui.core :as ui]
+   [promestein.frontend.common :refer [ref-backend-url]]
    [promestein.frontend.components.token :as token]
    [promestein.frontend.components.chunk :as chunk]
    [promestein.frontend.components.dictionary :as dictionary]))

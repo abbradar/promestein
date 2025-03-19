@@ -12,7 +12,6 @@
   (:require [clojure.string :as str])
   (:require [clojure.java.io :as io])
   (:require [clojure.java.jdbc :as db])
-  (:require [clojure.tools.trace :refer [trace]])
   (:require [cheshire.core :as json])
   (:require [digest :refer [digest]])
   (:require [honeysql.core :as sql])
