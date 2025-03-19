@@ -22,10 +22,11 @@
   "Update frontend configuration from well-known location."
   []
   (go
-    (let [host-config (-> (http/get "/config.json") <! :body)
-          backend-url (:backend-url host-config)]
-      (common/update-config! (dissoc host-config :backend-url))
-      (common/set-backend-url! backend-url))))
+    (if-let [host-config (-> (http/get "/config.json") <! :body)]
+      (let [backend-url (:backend-url host-config)]
+        (common/update-config! (dissoc host-config :backend-url))
+        (common/set-backend-url! backend-url))
+      (js/console.warn "No /config.json found, did you forget to place it to /public-dev?"))))
 
 (defn top-level-component
   [_data]
