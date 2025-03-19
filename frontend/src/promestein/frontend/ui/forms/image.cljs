@@ -112,9 +112,9 @@
              [:a.align-top.text-secondary
               {:href "#"
                :on-click
-               (fn [_] (do
-                         (swap! ref-state #(-> % (dissoc :message)))
-                         (reset! ref-value nil)))}
+               (fn [_]
+                 (swap! ref-state #(-> % (dissoc :message)))
+                 (reset! ref-value nil))}
               [:i.fas.fa-times.ml-1]]]
 
             (if loading?

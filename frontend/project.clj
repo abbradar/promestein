@@ -19,7 +19,8 @@
    [funcool/promesa "11.0.678"]
    [com.cemerick/url "0.1.1"]
    [clojure-humanize "0.2.2"]
-   [alandipert/storage-atom "2.0.1"]]
+   [alandipert/storage-atom "2.0.1"]
+   [binaryage/devtools "1.0.7"]]
 
   :plugins
   [[lein-monolith "1.10.1"]])

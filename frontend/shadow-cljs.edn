@@ -7,4 +7,6 @@
         :modules
         {:main {:entries [promestein.frontend.core]}}
 
-        :devtools {:http-root "public-dev" :http-port 8082}}}}
+        :devtools {:http-root "public-dev"
+                   :http-port 8082
+                   :preloads [devtools.preload]}}}}
